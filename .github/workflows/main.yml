@@ -31,10 +31,9 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-     - name: Deploy to Firebase
-        uses: w9jds/firebase-action@develop
-        with:
-          args: deploy --only hosting:prod
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          FIREBASE_PROJECT: my-digital-library-e5f9b
+      - name: Deploy to Firebase
+          uses: w9jds/firebase-action@develop
+          with:
+            args: deploy --only hosting:prod
+          env:
+            FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
