@@ -1,0 +1,19 @@
+.form-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container * {
+  width: 100%;
+}
+
+.mat-list-style {
+  overflow: auto;
+  height: calc(100vh - 160px);
+}
+
+.ag-grid-books {
+  width: 100%;
+  height: calc(100vh - 180px);
+  margin-top: 3px;
+}

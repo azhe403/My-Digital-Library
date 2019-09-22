@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-10">
+    <h1 mat-dialog-title>Add/edit book</h1>
+  </div>
+  <div class="col-2 float-right">
+    <button [mat-dialog-close]="true" cdkFocusInitial class="close-button" mat-raised-button>Close</button>
+  </div>
+</div>
+
+<mat-dialog-content class="mat-typography">
+  <p>edit-book works!</p>
+  <div class="form-container">
+    <form [formGroup]="this.bookService.form">
+      <mat-form-field class="full-width">
+        <input formControlName="bookName" matInput placeholder="Book name">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input formControlName="writerName" matInput placeholder="Writer">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input formControlName="publisherName" matInput placeholder="Publisher">
+      </mat-form-field>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input formControlName="numberOfPages" matInput placeholder="Numer for pages" type="number">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <input [matDatepicker]="picker" formControlName="datePublished" matInput placeholder="Choose a date">
+            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button (click)="onSubmit()" mat-raised-button>Add</button>
+
+  <!--  <button (click)="changeSendView(false)" *ngIf="showSendView" class="close-button" mat-raised-button>Back</button>-->
+  <!--  <button (click)="changeSendView(true)" *ngIf="!showSendView" mat-raised-button>Chat Action</button>-->
+  <button mat-dialog-close mat-raised-button>Soft-reset</button>
+  <button [mat-dialog-close]="true" cdkFocusInitial mat-raised-button>Hard-reset</button>
+</mat-dialog-actions>

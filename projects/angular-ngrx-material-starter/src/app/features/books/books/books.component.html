@@ -1,0 +1,82 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="row">
+      <div class="col">
+        <h3>Books</h3>
+      </div>
+      <div class="expand-space"></div>
+      <div class="col float-right">
+        <button (click)="openEditBook()" class="toolbar-button" mat-raised-button>Add book</button>
+<!--        <button (click)="loadSettings()" class="toolbar-button" mat-raised-button>Reload</button>-->
+<!--        <button (click)="openDetail()" class="toolbar-button" mat-raised-button>Open detail</button>-->
+<!--        <button (click)="changeColumnSize()" class="toolbar-button" mat-raised-button>Size Column</button>-->
+        <!--        <button matTooltip="{{sizeColumn | titlecase}}" (click)="sizeColumnMode()" color="primary" mat-icon-button>-->
+        <!--          <mat-icon aria-label="sizeColumn">format_size</mat-icon>-->
+        <!--          <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>-->
+        <!--        </button>-->
+      </div>
+      <!--      <div class="col">-->
+      <!--        <mat-form-field [floatLabel]="never" class="w-100">-->
+      <!--          <input matInput placeholder="search.." value="Sushi">-->
+      <!--        </mat-form-field>-->
+      <!--      </div>-->
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container-fluid">
+  <!--  <div class="row">-->
+  <!--    <div class="col">-->
+  <!--      <div class="form-container">-->
+  <!--        <form [formGroup]="this.bookService.form">-->
+  <!--          <mat-form-field class="example-full-width">-->
+  <!--            <input formControlName="bookName" matInput placeholder="Book name">-->
+  <!--          </mat-form-field>-->
+  <!--          <mat-form-field class="example-full-width">-->
+  <!--            <input formControlName="writerName" matInput placeholder="Writer">-->
+  <!--          </mat-form-field>-->
+  <!--          <mat-form-field class="example-full-width">-->
+  <!--            <input formControlName="publisherName" matInput placeholder="Publisher">-->
+  <!--          </mat-form-field>-->
+  <!--          <mat-form-field class="example-full-width">-->
+  <!--            <input formControlName="numberOfPages" matInput placeholder="Numer for pages" type="number">-->
+  <!--          </mat-form-field>-->
+  <!--          <mat-form-field>-->
+  <!--            <input [matDatepicker]="picker" formControlName="datePublished" matInput placeholder="Choose a date">-->
+  <!--            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>-->
+  <!--            <mat-datepicker #picker></mat-datepicker>-->
+  <!--          </mat-form-field>-->
+  <!--        </form>-->
+  <!--      </div>-->
+  <!--      <button (click)="onSubmit()" mat-raised-button>Add</button>-->
+
+  <!--    </div>-->
+  <!--    <div class="col">-->
+  <!--      <ul>-->
+  <!--        <li *ngFor="let book of bookLists">-->
+  <!--          {{book.payload.doc.data().bookName}}-->
+  <!--          {{book.payload.doc.data().publisherName}}-->
+  <!--        </li>-->
+  <!--      </ul>-->
+  <!--      <mat-list class="mat-list-style">-->
+  <!--        <mat-list-item *ngFor="let book of bookLists">-->
+  <!--          <h5>{{book.payload.doc.data().bookName}}</h5>-->
+  <!--          <a matLine href="...">{{ link }}</a>-->
+  <!--          <button (click)="deleteBook(book)" mat-stroked-button>x</button>-->
+  <!--          <button (click)="showInfo(link)" mat-icon-button>-->
+  <!--            <mat-icon>info</mat-icon>-->
+  <!--          </button>-->
+  <!--        </mat-list-item>-->
+  <!--      </mat-list>-->
+
+  <ag-grid-angular
+    (columnResized)="onColumnResized($event)"
+    (gridReady)="agGridReady($event)"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDefs"
+    class="ag-grid-books ag-theme-balham-dark">
+  </ag-grid-angular>
+
+  <!--    </div>-->
+  <!--  </div>-->
+</div>
