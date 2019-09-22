@@ -56,3 +56,6 @@ debug.log
 # metals
 .metals
 .bloop
+
+# firebase
+.firebase
