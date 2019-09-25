@@ -20,20 +20,21 @@ jobs:
         with:
           name: dist
           path: dist
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: Download Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: dist
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@develop
-        with:
-          args: deploy --only hosting:prod
+      - name: FTP-Deploy-Action
+        uses: SamKirkland/FTP-Deploy-Action@master
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FTP_SERVER: ${{ secrets.HOST_NAME }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          LOCAL_DIR: dist
+          REMOTE_DIR: my-digital-library.indemo.azhe.space
+          ARGS: --delete --transfer-all
+      - name: Send message to Telegram
+        uses: appleboy/telegram-action@master
+        env:
+          TELEGRAM_TOKEN: ${{ secrets. TGBOT_AZHE_ASSISTANT }}
+          TELEGRAM_TO: ${{ secrets. TGUSER_ME }}
+        with:
+          message: |
+            The ${{ github.event_name }} event triggered final step.
+            echo This event is a pull request that had an assignee removed.
