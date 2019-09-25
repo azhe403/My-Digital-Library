@@ -1,25 +1,27 @@
-import browser from 'browser-detect';
-import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import browser from "browser-detect";
+import { Component, OnInit } from "@angular/core";
+import { select, Store } from "@ngrx/store";
+import { Observable } from "rxjs";
 
-import { environment as env } from '../../environments/environment';
+import { environment as env } from "../../environments/environment";
 
 import {
+  AppState,
   authLogin,
   authLogout,
-  routeAnimations,
-  AppState,
   LocalStorageService,
+  routeAnimations,
+  selectEffectiveTheme,
   selectIsAuthenticated,
-  selectSettingsStickyHeader,
   selectSettingsLanguage,
-  selectEffectiveTheme
-} from '../core/core.module';
+  selectSettingsStickyHeader
+} from "../core/core.module";
 import {
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeLanguage
-} from '../core/settings/settings.actions';
+} from "../core/settings/settings.actions";
+import { MatDialog } from "@angular/material/dialog";
+import { SettingsContainerComponent } from "../features/settings/settings/settings-container.component";
 
 @Component({
   selector: 'anms-root',
@@ -51,7 +53,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private storageService: LocalStorageService
+    private storageService: LocalStorageService,
+    private dialog: MatDialog
   ) {}
 
   private static isIEorEdgeOrSafari() {
@@ -84,5 +87,9 @@ export class AppComponent implements OnInit {
 
   onLanguageSelect({ value: language }) {
     this.store.dispatch(actionSettingsChangeLanguage({ language }));
+  }
+
+  openSettingDialog() {
+    this.dialog.open(SettingsContainerComponent);
   }
 }

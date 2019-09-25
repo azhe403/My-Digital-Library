@@ -7,6 +7,7 @@ import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
 import { selectEffectiveTheme } from "../../../core/settings/settings.selectors";
 import { AppState } from "../../../core/core.state";
+import { ConsoleService } from "../../../core/console/console.service";
 
 @Component({
   selector: "anms-books",
@@ -46,13 +47,14 @@ export class BooksComponent implements OnInit {
   constructor(
     public bookService: BooksService,
     private dialog: MatDialog,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private console: ConsoleService
   ) {
 
   }
 
   onColumnResized(data) {
-    console.log("column resized", data);
+    this.console.log("column resized", data);
   }
 
   agGridReady(grid) {
@@ -63,7 +65,7 @@ export class BooksComponent implements OnInit {
   ngOnInit() {
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
 
-    console.log("theme", this.theme$);
+    this.console.log("theme", this.theme$);
 
     this.bookService
       .getBooks()
@@ -76,7 +78,7 @@ export class BooksComponent implements OnInit {
         });
 
 
-        console.log("ROWDATA AXHE", rowData);
+        this.console.log("ROWDATA AXHE", rowData);
         this.gridApi.setRowData(rowData);
       });
   }

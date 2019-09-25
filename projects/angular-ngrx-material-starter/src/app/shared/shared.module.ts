@@ -27,34 +27,9 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatNativeDateModule } from "@angular/material";
 
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faBars,
-  faBook,
-  faCaretDown,
-  faCaretUp,
-  faCheck,
-  faCog,
-  faEdit,
-  faExclamationTriangle,
-  faFilter,
-  faLanguage,
-  faLightbulb,
-  faPaintBrush,
-  faPlayCircle,
-  faPlus,
-  faPowerOff,
-  faRocket,
-  faSquare,
-  faStream,
-  faTasks,
-  faTimes,
-  faTrash,
-  faUserCircle,
-  faWindowMaximize
-} from "@fortawesome/free-solid-svg-icons";
-import { faGithub, faInstagram, faMediumM, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { FaIconLibrary, FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 import { BigInputComponent } from "./big-input/big-input/big-input.component";
 import { BigInputActionComponent } from "./big-input/big-input-action/big-input-action.component";
 import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
@@ -63,36 +38,36 @@ import { environment } from "../../environments/environment";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AgGridModule } from "ag-grid-angular";
 
-library.add(
-  faBars,
-  faUserCircle,
-  faPowerOff,
-  faCog,
-  faRocket,
-  faPlayCircle,
-  faGithub,
-  faMediumM,
-  faTwitter,
-  faInstagram,
-  faYoutube,
-  faPlus,
-  faEdit,
-  faTrash,
-  faTimes,
-  faCaretUp,
-  faCaretDown,
-  faExclamationTriangle,
-  faFilter,
-  faTasks,
-  faCheck,
-  faSquare,
-  faLanguage,
-  faPaintBrush,
-  faLightbulb,
-  faWindowMaximize,
-  faStream,
-  faBook
-);
+// library.add(
+//   faBars,
+//   faUserCircle,
+//   faPowerOff,
+//   faCog,
+//   faRocket,
+//   faPlayCircle,
+//   faGithub,
+//   faMediumM,
+//   faTwitter,
+//   faInstagram,
+//   faYoutube,
+//   faPlus,
+//   faEdit,
+//   faTrash,
+//   faTimes,
+//   faCaretUp,
+//   faCaretDown,
+//   faExclamationTriangle,
+//   faFilter,
+//   faTasks,
+//   faCheck,
+//   faSquare,
+//   faLanguage,
+//   faPaintBrush,
+//   faLightbulb,
+//   faWindowMaximize,
+//   faStream,
+//   faBook
+// );
 
 @NgModule({
   imports: [
@@ -170,5 +145,10 @@ library.add(
     AgGridModule
   ]
 })
+
 export class SharedModule {
+  constructor(iconLibrary: FaIconLibrary) {
+    iconLibrary.addIconPacks(fas);
+    iconLibrary.addIconPacks(fab);
+  }
 }

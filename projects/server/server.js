@@ -11,13 +11,13 @@ app.use(compression());
 app.use(
   CONTEXT,
   express.static(
-    path.resolve(__dirname, '../../dist/angular-ngrx-material-starter')
+    path.resolve(__dirname, "../../dist")
   )
 );
 app.use(
   '/',
   express.static(
-    path.resolve(__dirname, '../../dist/angular-ngrx-material-starter')
+    path.resolve(__dirname, "../../dist")
   )
 );
 app.listen(PORT, () =>

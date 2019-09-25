@@ -56,7 +56,7 @@
             </button>
           </mat-menu>
 
-          <button class="d-none d-sm-inline" mat-icon-button routerLink="settings">
+          <button (click)="openSettingDialog()" class="d-none d-sm-inline" mat-icon-button>
             <fa-icon icon="cog"></fa-icon>
           </button>
 
@@ -69,13 +69,13 @@
             <fa-icon [icon]="['fab','github']"></fa-icon>
           </a>
 
-          <span *ngIf="language$ | async as language">
-            <mat-select (selectionChange)="onLanguageSelect($event)" [ngModel]="language">
-              <mat-option *ngFor="let l of languages" [value]="l">
-                {{ l.toUpperCase() }}
-              </mat-option>
-            </mat-select>
-          </span>
+          <!--          <span *ngIf="language$ | async as language">-->
+          <!--            <mat-select (selectionChange)="onLanguageSelect($event)" [ngModel]="language">-->
+          <!--              <mat-option *ngFor="let l of languages" [value]="l">-->
+          <!--                {{ l.toUpperCase() }}-->
+          <!--              </mat-option>-->
+          <!--            </mat-select>-->
+          <!--          </span>-->
         </mat-toolbar>
       </div>
 
