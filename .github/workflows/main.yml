@@ -28,7 +28,7 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           LOCAL_DIR: dist
           REMOTE_DIR: my-digital-library.indemo.azhe.space
-          ARGS: --delete --transfer-all --dry-run
+          ARGS: --delete --transfer-all
       - name: Send message to Telegram
         uses: appleboy/telegram-action@master
         env:
