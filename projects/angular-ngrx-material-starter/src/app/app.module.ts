@@ -29,7 +29,6 @@ import { SettingsContainerComponent } from "./features/settings/settings/setting
   declarations: [
     AppComponent,
     SettingsContainerComponent
-
   ],
   bootstrap: [
     AppComponent
