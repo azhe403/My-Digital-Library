@@ -17,24 +17,32 @@ export class BooksService {
   });
   private collectionName = 'books';
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {
+  }
 
-  createBook(data){
+  createBook(data) {
     return new Promise<any>((resolve, reject) => {
       this.firestore
         .collection(this.collectionName)
         .add(data)
-        .then(res => {}, err => reject(err));
+        .then(res => {
+        }, err => reject(err));
     });
   }
 
-  getBooks(){
+  getBooks() {
     return this.firestore.collection(this.collectionName).snapshotChanges();
   }
 
-  deleteBook(data){
-return this.firestore.collection(this.collectionName)
-  .doc(data.payload.doc.id)
-  .delete();
+  deleteBook(data) {
+    return this.firestore.collection(this.collectionName)
+      .doc(data.payload.doc.id)
+      .delete();
+  }
+
+  deleteBookById(id) {
+    return this.firestore.collection(this.collectionName)
+      .doc(id)
+      .delete();
   }
 }

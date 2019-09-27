@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { BooksService } from "../../../shared/services/books.service";
-import { MatDialogRef } from "@angular/material/dialog";
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { BooksService } from '../../../shared/services/books.service';
 
 @Component({
   selector: 'anms-edit-book',
@@ -13,8 +13,9 @@ export class EditBookComponent implements OnInit {
 
   constructor(
     public bookService: BooksService,
-    private dialogRef: MatDialogRef<EditBookComponent>,
-  ) { }
+    private dialogRef: MatDialogRef<EditBookComponent>
+  ) {
+  }
 
   ngOnInit() {
   }
@@ -26,7 +27,7 @@ export class EditBookComponent implements OnInit {
     this.bookService.createBook(data).then(res => {
       console.log('saved', res);
     });
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
 }

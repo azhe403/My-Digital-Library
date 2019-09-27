@@ -1,42 +1,43 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material';
 
-import { TranslateModule } from "@ngx-translate/core";
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { MatButtonModule } from "@angular/material/button";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatSelectModule } from "@angular/material/select";
-import { MatTabsModule } from "@angular/material/tabs";
-import { MatInputModule } from "@angular/material/input";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatChipsModule } from "@angular/material/chips";
-import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatCardModule } from "@angular/material/card";
-import { MatListModule } from "@angular/material/list";
-import { MatIconModule } from "@angular/material/icon";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { MatSlideToggleModule } from "@angular/material/slide-toggle";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatSliderModule } from "@angular/material/slider";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatDialogModule } from "@angular/material/dialog";
-import { MatNativeDateModule } from "@angular/material";
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
-import { FaIconLibrary, FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { BigInputComponent } from "./big-input/big-input/big-input.component";
-import { BigInputActionComponent } from "./big-input/big-input-action/big-input-action.component";
-import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
-import { AngularFireModule } from "@angular/fire";
-import { environment } from "../../environments/environment";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { AgGridModule } from "ag-grid-angular";
+import { TranslateModule } from '@ngx-translate/core';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { AgGridModule } from 'ag-grid-angular';
+import { environment } from '../../environments/environment';
+import { BigInputActionComponent } from './big-input/big-input-action/big-input-action.component';
+import { BigInputComponent } from './big-input/big-input/big-input.component';
+import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
 
 // library.add(
 //   faBars,
@@ -101,7 +102,9 @@ import { AgGridModule } from "ag-grid-angular";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
 
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+
+    SweetAlert2Module.forRoot()
   ],
   declarations: [
     BigInputComponent,
@@ -142,7 +145,8 @@ import { AgGridModule } from "ag-grid-angular";
     BigInputComponent,
     BigInputActionComponent,
     RtlSupportDirective,
-    AgGridModule
+    AgGridModule,
+    SweetAlert2Module
   ]
 })
 

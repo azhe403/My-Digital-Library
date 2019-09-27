@@ -1,18 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { BooksService } from "../../../shared/services/books.service";
-import { GridApi } from "ag-grid-community";
-import { MatDialog } from "@angular/material";
-import { EditBookComponent } from "../edit-book/edit-book.component";
-import { Observable } from "rxjs";
-import { select, Store } from "@ngrx/store";
-import { selectEffectiveTheme } from "../../../core/settings/settings.selectors";
-import { AppState } from "../../../core/core.state";
-import { ConsoleService } from "../../../core/console/console.service";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { select, Store } from '@ngrx/store';
+import { SweetAlert2LoaderService } from '@sweetalert2/ngx-sweetalert2';
+import { GridApi } from 'ag-grid-community';
+import { Observable } from 'rxjs';
+import { ConsoleService } from '../../../core/console/console.service';
+import { AppState } from '../../../core/core.state';
+import { selectEffectiveTheme } from '../../../core/settings/settings.selectors';
+import { BooksService } from '../../../shared/services/books.service';
+import { EditBookComponent } from '../edit-book/edit-book.component';
 
 @Component({
-  selector: "anms-books",
-  templateUrl: "./books.component.html",
-  styleUrls: ["./books.component.scss"]
+  selector: 'anms-books',
+  templateUrl: './books.component.html',
+  styleUrls: ['./books.component.scss']
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BooksComponent implements OnInit {
@@ -21,6 +22,8 @@ export class BooksComponent implements OnInit {
   bookLists;
   gridApi: GridApi;
   gridColumnApi;
+  selectedBooks;
+  swal: any;
 
   defaultColDefs = {
     sortable: true,
@@ -29,11 +32,12 @@ export class BooksComponent implements OnInit {
   };
 
   columnDefs = [
-    { headerName: "Book Title", field: "bookName" },
-    { headerName: "Number of Pages", field: "numberOfPages" },
-    { headerName: "Publisher Name", field: "publisherName" },
-    { headerName: "Writer Name", field: "writerName" },
-    { headerName: "Publish", field: "datePublished" }
+    { headerName: 'ID', field: 'id' },
+    { headerName: 'Book Title', field: 'bookName' },
+    { headerName: 'Number of Pages', field: 'numberOfPages', width: 135 },
+    { headerName: 'Publisher Name', field: 'publisherName' },
+    { headerName: 'Writer Name', field: 'writerName' },
+    { headerName: 'Publish', field: 'datePublished' }
   ];
 
   // rowData = [
@@ -48,13 +52,14 @@ export class BooksComponent implements OnInit {
     public bookService: BooksService,
     private dialog: MatDialog,
     private store: Store<AppState>,
-    private console: ConsoleService
+    private console: ConsoleService,
+    private swalLoader: SweetAlert2LoaderService
   ) {
 
   }
 
   onColumnResized(data) {
-    this.console.log("column resized", data);
+    this.console.log('column resized', data);
   }
 
   agGridReady(grid) {
@@ -65,20 +70,27 @@ export class BooksComponent implements OnInit {
   ngOnInit() {
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
 
-    this.console.log("theme", this.theme$);
+    this.console.log('theme', this.theme$);
 
     this.bookService
       .getBooks()
       .subscribe(res => {
-        console.log("books", res);
+        console.log('books', res);
 
         const rowData = [];
         res.forEach(x => {
-          rowData.push(x.payload.doc.data());
+          let row = {};
+          row = x.payload.doc.data();
+          row['id'] = x.payload.doc.id;
+
+          // this.console.log(row);
+          // this.console.log(x.payload.doc.id);
+
+          rowData.push(row);
         });
 
 
-        this.console.log("ROWDATA AXHE", rowData);
+        this.console.log('row_data', rowData);
         this.gridApi.setRowData(rowData);
       });
   }
@@ -88,12 +100,62 @@ export class BooksComponent implements OnInit {
     const data = this.bookService.form.value;
 
     this.bookService.createBook(data).then(res => {
-      console.log("saved", res);
+      console.log('saved', res);
     });
   }
 
   openEditBook() {
     this.dialog.open(EditBookComponent);
+  }
+
+  onSelectionChanged(data) {
+    this.console.log('select data', data);
+
+    this.selectedBooks = this.gridApi.getSelectedRows();
+    this.console.log('selected', this.selectedBooks);
+  }
+
+  async deleteSelectedBook() {
+    const swal = await this.swalLoader.swal;
+
+    if (this.selectedBooks) {
+      await swal.fire({
+        title: 'Are you sure?',
+        text: 'Once deleted, you will not be able to recover this imaginary file!',
+        type: 'warning',
+        showConfirmButton: true,
+        showCancelButton: true
+      })
+        .then((willDelete) => {
+
+          if (willDelete.value) {
+            swal.fire('Success');
+            this.selectedBooks.forEach(selected => {
+              this.console.log('deleted', selected.id);
+              this.bookService.deleteBookById(selected.id).then(res =>
+                this.console.log('delete', res)
+              );
+            });
+          } else {
+            swal.fire({
+                title: 'Delete row',
+                text: 'Delete cancelled',
+                type: 'info'
+              }
+            );
+          }
+
+          console.log(willDelete);
+        });
+    } else {
+      await swal.fire({
+        title: 'Delete row',
+        text: 'Please select row to delete',
+        type: 'warning'
+
+      });
+      this.console.log('nothing to delete');
+    }
   }
 
   deleteBook = data => this.bookService.deleteBook(data);

@@ -7,9 +7,35 @@
       <div class="expand-space"></div>
       <div class="col float-right">
         <button (click)="openEditBook()" class="toolbar-button" mat-raised-button>Add book</button>
-<!--        <button (click)="loadSettings()" class="toolbar-button" mat-raised-button>Reload</button>-->
-<!--        <button (click)="openDetail()" class="toolbar-button" mat-raised-button>Open detail</button>-->
-<!--        <button (click)="changeColumnSize()" class="toolbar-button" mat-raised-button>Size Column</button>-->
+        <button (click)="deleteSelectedBook()" class="toolbar-button" mat-raised-button>Delete book</button>
+        <!--        <button-->
+        <!--          (cancel)="deleteSelectedBook()"-->
+        <!--          (confirm)="deleteSelectedBook()"-->
+        <!--          [swal]="['Hello world!', 'How\'s the world going?', 'question']">-->
+
+        <!--          Set my e-mail address-->
+        <!--        </button>-->
+
+        <!--        <button [swal]="deleteSwal">-->
+        <!--          Delete-->
+        <!--        </button>-->
+
+        <!--        <swal #deleteSwal (confirm)="deleteSelectedBook()"-->
+        <!--              [focusCancel]="true"-->
+        <!--              [showCancelButton]="true"-->
+        <!--              text="This cannot be undone"-->
+        <!--              title="Delete?" type="question"></swal>-->
+
+        <!--        <button [swal]="deleteSwal">Delete</button>-->
+        <!--        <button (confirm)="deleteSelectedBook()"-->
+        <!--                [swal]="['Oops!', 'This is not implemented yet :/', 'warning']"-->
+        <!--                mat-raised-button>-->
+
+        <!--          Set my e-mail address-->
+        <!--        </button>-->
+        <!--        <button (click)="loadSettings()" class="toolbar-button" mat-raised-button>Reload</button>-->
+        <!--        <button (click)="openDetail()" class="toolbar-button" mat-raised-button>Open detail</button>-->
+        <!--        <button (click)="changeColumnSize()" class="toolbar-button" mat-raised-button>Size Column</button>-->
         <!--        <button matTooltip="{{sizeColumn | titlecase}}" (click)="sizeColumnMode()" color="primary" mat-icon-button>-->
         <!--          <mat-icon aria-label="sizeColumn">format_size</mat-icon>-->
         <!--          <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>-->
@@ -72,10 +98,22 @@
   <ag-grid-angular
     (columnResized)="onColumnResized($event)"
     (gridReady)="agGridReady($event)"
+    (selectionChanged)="onSelectionChanged($event)"
     [columnDefs]="columnDefs"
     [defaultColDef]="defaultColDefs"
-    class="ag-grid-books ag-theme-balham">
+    class="ag-grid-books ag-theme-balham"
+    rowSelection="single">
   </ag-grid-angular>
+
+  <!--  <swal-->
+  <!--    #deleteSwal-->
+  <!--    (confirm)="deleteSelectedBook()"-->
+  <!--    [focusCancel]="true"-->
+  <!--    [showCancelButton]="true"-->
+  <!--    text="This cannot be undone"-->
+  <!--    title="Delete?"-->
+  <!--    type="question">-->
+  <!--  </swal>-->
 
   <!--    </div>-->
   <!--  </div>-->
