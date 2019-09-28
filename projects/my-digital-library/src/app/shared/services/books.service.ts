@@ -7,7 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class BooksService {
 
-  public form = new FormGroup({
+  public formGroup = new FormGroup({
     bookName: new FormControl('', [
       Validators.required
     ]),
@@ -36,6 +36,17 @@ export class BooksService {
       this.firestore
         .collection(this.collectionName)
         .add(data)
+        .then(res => {
+        }, err => reject(err));
+    });
+  }
+
+  updateBook(data, id) {
+    return new Promise<any>((resolve, reject) => {
+      this.firestore
+        .collection(this.collectionName)
+        .doc(id)
+        .set(data)
         .then(res => {
         }, err => reject(err));
     });

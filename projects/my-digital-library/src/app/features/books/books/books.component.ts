@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { select, Store } from '@ngrx/store';
 import { SweetAlert2LoaderService } from '@sweetalert2/ngx-sweetalert2';
 import { GridApi } from 'ag-grid-community';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 import { ConsoleService } from '../../../core/console/console.service';
 import { AppState } from '../../../core/core.state';
 import { selectEffectiveTheme } from '../../../core/settings/settings.selectors';
@@ -97,23 +98,42 @@ export class BooksComponent implements OnInit {
   }
 
   onSubmit() {
-    this.bookService.form.value.books = this.books;
-    const data = this.bookService.form.value;
+    this.bookService.formGroup.value.books = this.books;
+    const data = this.bookService.formGroup.value;
 
     this.bookService.createBook(data).then(res => {
       console.log('saved', res);
     });
   }
 
-  openEditBook() {
-    this.dialog.open(EditBookComponent);
+  openEditBook(data) {
+    ConsoleService.log2('open edit', data);
+    if (data == 'add') {
+      this.dialog.open(EditBookComponent);
+    }
+
+    if (this.selectedBooks != null) {
+      this.dialog.open(EditBookComponent);
+    } else {
+      Swal.fire({
+        title: 'Delete row',
+        text: 'Please select row to delete',
+        type: 'warning'
+      }).then(res => ConsoleService.log2(res));
+    }
   }
 
   onSelectionChanged(data) {
     this.console.log('select data', data);
 
     this.selectedBooks = this.gridApi.getSelectedRows();
-    this.console.log('selected', this.selectedBooks);
+    this.console.log('selected', this.selectedBooks[0]);
+
+    if (this.selectedBooks.length > 0) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = this.selectedBooks;
+      this.dialog.open(EditBookComponent, dialogConfig);
+    }
   }
 
   async deleteSelectedBook() {
@@ -166,8 +186,8 @@ function formatDate(param) {
   const data = param.data;
   const seconds = data.datePublished.seconds;
   const date = new Date(seconds * 1000).toISOString().slice(0, 10);
-  console.log('format second', seconds);
-  console.log('format date', date);
+  ConsoleService.log2('format second', seconds);
+  ConsoleService.log2('format date', date);
 
   return date;
 }

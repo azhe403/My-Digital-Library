@@ -6,7 +6,8 @@
       </div>
       <div class="expand-space"></div>
       <div class="col float-right">
-        <button (click)="openEditBook()" class="toolbar-button" mat-raised-button>Add book</button>
+        <button (click)="openEditBook('add')" class="toolbar-button" mat-raised-button>Add book</button>
+        <button (click)="openEditBook('edit')" class="toolbar-button" mat-raised-button>Edit book</button>
         <button (click)="deleteSelectedBook()" class="toolbar-button" mat-raised-button>Delete book</button>
         <!--        <button-->
         <!--          (cancel)="deleteSelectedBook()"-->

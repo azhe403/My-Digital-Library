@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-10">
-    <h1 mat-dialog-title>Add/edit book</h1>
+    <h1 mat-dialog-title>{{editorTitle}}</h1>
   </div>
   <div class="col-2 float-right">
     <button [mat-dialog-close]="true" cdkFocusInitial class="close-button" mat-raised-button>Close</button>
@@ -10,34 +10,42 @@
 <mat-dialog-content class="mat-typography">
   <!--  <p>edit-book works!</p>-->
   <div class="form-container">
-    <form [formGroup]="this.bookService.form">
+    <form [formGroup]="this.bookService.formGroup">
       <mat-form-field class="full-width">
         <input formControlName="bookName" matInput placeholder="Book name">
+        <mat-error *ngIf="formsCtl.bookName.errors">
+          Book Name is required
+        </mat-error>
       </mat-form-field>
-      <div *ngIf="formsCtl.bookName.errors">
-        Number of Pages minimum is 0
-      </div>
-
       <mat-form-field class="full-width">
         <input formControlName="writerName" matInput placeholder="Writer">
+        <mat-error *ngIf="formsCtl.writerName.errors">
+          Writer Name is required
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="full-width">
         <input formControlName="publisherName" matInput placeholder="Publisher">
+        <mat-error *ngIf="formsCtl.publisherName.errors">
+          Publisher Name is required
+        </mat-error>
       </mat-form-field>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
             <input formControlName="numberOfPages" matInput min="0" placeholder="Numer for pages" type="number">
+            <mat-error *ngIf="formsCtl.numberOfPages.errors">
+              Number of Pages minimum is 0
+            </mat-error>
           </mat-form-field>
-          <div *ngIf="formsCtl.numberOfPages.errors">
-            Number of Pages minimum is 0
-          </div>
         </div>
         <div class="col">
           <mat-form-field>
             <input [matDatepicker]="picker" formControlName="datePublished" matInput placeholder="Choose a date">
             <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="formsCtl.datePublished.errors">
+              Date Published is required
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -46,10 +54,10 @@
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button (click)="onSubmit()" [disabled]="bookService.form.invalid" mat-raised-button>Add</button>
+  <button (click)="onSubmit()" [disabled]="bookService.formGroup.invalid" mat-raised-button>Save Book</button>
+  <button (click)="onReset()" mat-raised-button>Reset Form</button>
 
   <!--  <button (click)="changeSendView(false)" *ngIf="showSendView" class="close-button" mat-raised-button>Back</button>-->
   <!--  <button (click)="changeSendView(true)" *ngIf="!showSendView" mat-raised-button>Chat Action</button>-->
-  <button mat-dialog-close mat-raised-button>Soft-reset</button>
-  <button [mat-dialog-close]="true" cdkFocusInitial mat-raised-button>Hard-reset</button>
+  <!--  <button [mat-dialog-close]="true" cdkFocusInitial mat-raised-button>Hard-reset</button>-->
 </mat-dialog-actions>
