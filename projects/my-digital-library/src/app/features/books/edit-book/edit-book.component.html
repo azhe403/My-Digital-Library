@@ -14,6 +14,10 @@
       <mat-form-field class="full-width">
         <input formControlName="bookName" matInput placeholder="Book name">
       </mat-form-field>
+      <div *ngIf="formsCtl.bookName.errors">
+        Number of Pages minimum is 0
+      </div>
+
       <mat-form-field class="full-width">
         <input formControlName="writerName" matInput placeholder="Writer">
       </mat-form-field>
@@ -25,6 +29,9 @@
           <mat-form-field class="full-width">
             <input formControlName="numberOfPages" matInput min="0" placeholder="Numer for pages" type="number">
           </mat-form-field>
+          <div *ngIf="formsCtl.numberOfPages.errors">
+            Number of Pages minimum is 0
+          </div>
         </div>
         <div class="col">
           <mat-form-field>
@@ -39,7 +46,7 @@
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button (click)="onSubmit()" mat-raised-button>Add</button>
+  <button (click)="onSubmit()" [disabled]="bookService.form.invalid" mat-raised-button>Add</button>
 
   <!--  <button (click)="changeSendView(false)" *ngIf="showSendView" class="close-button" mat-raised-button>Back</button>-->
   <!--  <button (click)="changeSendView(true)" *ngIf="!showSendView" mat-raised-button>Chat Action</button>-->

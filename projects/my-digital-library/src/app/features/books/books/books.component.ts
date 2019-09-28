@@ -32,12 +32,12 @@ export class BooksComponent implements OnInit {
   };
 
   columnDefs = [
-    { headerName: 'ID', field: 'id' },
+    { headerName: 'ID', field: 'id', hide: true },
     { headerName: 'Book Title', field: 'bookName' },
     { headerName: 'Number of Pages', field: 'numberOfPages', width: 135 },
     { headerName: 'Publisher Name', field: 'publisherName' },
     { headerName: 'Writer Name', field: 'writerName' },
-    { headerName: 'Publish', field: 'datePublished' }
+    { headerName: 'Publish', field: 'datePublished', valueFormatter: formatDate }
   ];
 
   // rowData = [
@@ -66,6 +66,7 @@ export class BooksComponent implements OnInit {
     this.gridApi = grid.api;
     this.gridColumnApi = grid.columnApi;
   }
+
 
   ngOnInit() {
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
@@ -159,4 +160,14 @@ export class BooksComponent implements OnInit {
   }
 
   deleteBook = data => this.bookService.deleteBook(data);
+}
+
+function formatDate(param) {
+  const data = param.data;
+  const seconds = data.datePublished.seconds;
+  const date = new Date(seconds * 1000).toISOString().slice(0, 10);
+  console.log('format second', seconds);
+  console.log('format date', date);
+
+  return date;
 }

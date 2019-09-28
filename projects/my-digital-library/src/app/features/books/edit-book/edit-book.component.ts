@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BooksService } from '../../../shared/services/books.service';
 
 @Component({
   selector: 'anms-edit-book',
   templateUrl: './edit-book.component.html',
-  styleUrls: ['./edit-book.component.scss']
+  styleUrls: ['./edit-book.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditBookComponent implements OnInit {
 
@@ -15,6 +16,10 @@ export class EditBookComponent implements OnInit {
     public bookService: BooksService,
     private dialogRef: MatDialogRef<EditBookComponent>
   ) {
+  }
+
+  get formsCtl() {
+    return this.bookService.form.controls;
   }
 
   ngOnInit() {
