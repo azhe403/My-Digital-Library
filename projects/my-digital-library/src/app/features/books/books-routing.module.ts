@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { BooksComponent } from './books/books.component';
+import { AuthGuardService } from '../../core/core.module';
 
 const routes: Routes = [
   {
     path: 'view',
-    component: BooksComponent
+    component: BooksComponent,
+    canActivate: [AuthGuardService]
   }
 ];
 

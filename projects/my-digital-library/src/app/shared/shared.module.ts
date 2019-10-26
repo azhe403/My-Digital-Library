@@ -38,6 +38,7 @@ import { environment } from '../../environments/environment';
 import { BigInputActionComponent } from './big-input/big-input-action/big-input-action.component';
 import { BigInputComponent } from './big-input/big-input/big-input.component';
 import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // library.add(
 //   faBars,
@@ -103,6 +104,7 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
     AngularFirestoreModule,
 
     AgGridModule.withComponents([]),
+    FlexLayoutModule,
 
     SweetAlert2Module.forRoot()
   ],
@@ -146,6 +148,7 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
     BigInputActionComponent,
     RtlSupportDirective,
     AgGridModule,
+    FlexLayoutModule,
     SweetAlert2Module
   ]
 })
