@@ -7,7 +7,7 @@ by [@azhe403](https://github.com/azhe403)
 
 ## Table of Content
 
-- [Live Demo](https://my-digital-library.indemo.azhe.space/)
+- [Live Demo](https://my-digital-library.indemo.azhe.space/){:target="_blank"}
 - [Getting Started](#getting-started)
 - [Useful Commands](#useful-commands)
 - [Make It Your Own](#make-it-your-own)
