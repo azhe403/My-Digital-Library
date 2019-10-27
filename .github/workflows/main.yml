@@ -21,7 +21,7 @@ jobs:
           name: dist
           path: dist
       - name: FTP-Deploy-Action
-        uses: SamKirkland/FTP-Deploy-Action@master
+        uses: SamKirkland/FTP-Deploy-Action@2.0.0
         env:
           FTP_SERVER: ${{ secrets.HOST_NAME }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
