@@ -5,9 +5,12 @@ by [@azhe403](https://github.com/azhe403)
 [![license](https://img.shields.io/github/license/Azhe403/My-Digital-Library.svg)](https://github.com/Azhe403/My-Digital-Library/blob/master/LICENSE) [![All Contributors](https://img.shields.io/badge/all_contributors-37-orange.svg?style=flat-square)](#contributors) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![Build Status](https://travis-ci.org/Azhe403/My-Digital-Library.svg?branch=master)](https://travis-ci.org/Azhe403/My-Digital-Library)
 [![Codecov](https://img.shields.io/codecov/c/github/Azhe403/My-Digital-Library.svg)](https://codecov.io/gh/Azhe403/My-Digital-Library)
 
+[![Depfu](https://badges.depfu.com/badges/e88a5c519a8bceb31156cb9acbfa8407/status.svg)](https://depfu.com)
+[![Depfu](https://badges.depfu.com/badges/e88a5c519a8bceb31156cb9acbfa8407/overview.svg)](https://depfu.com/github/Azhe403/My-Digital-Library?project_id=9962)
+[![Depfu](https://badges.depfu.com/badges/e88a5c519a8bceb31156cb9acbfa8407/count.svg)](https://depfu.com/github/Azhe403/My-Digital-Library?project_id=9962)
 ## Table of Content
 
-- [Live Demo](https://my-digital-library.indemo.azhe.space/){:target="_blank"}
+- [Live Demo](https://my-digital-library.indemo.azhe.space/)
 - [Getting Started](#getting-started)
 - [Useful Commands](#useful-commands)
 - [Make It Your Own](#make-it-your-own)
