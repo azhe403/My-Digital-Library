@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material';
+import { MAT_DATE_LOCALE, MatGridListModule, MatNativeDateModule } from '@angular/material';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -27,10 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import {
-  FaIconLibrary,
-  FontAwesomeModule
-} from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
@@ -100,6 +97,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatDividerModule,
     MatFormFieldModule,
     MatDialogModule,
+    MatGridListModule,
 
     FontAwesomeModule,
 
@@ -144,6 +142,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
+    MatGridListModule,
 
     FontAwesomeModule,
 

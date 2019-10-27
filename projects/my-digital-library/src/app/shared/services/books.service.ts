@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ConsoleService } from '../../core/console/console.service';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,14 @@ export class BooksService {
 
   getBooks() {
     return this.firestore.collection(this.collectionName).snapshotChanges();
+  }
+
+  filterBooks(start: string, end: string) {
+    ConsoleService.log2('keyword', start + ' ' + end);
+    return this.firestore.collection(this.collectionName, ref => ref
+      .orderBy('bookName')
+      .startAt(start.toLowerCase())
+      .endAt(end)).snapshotChanges();
   }
 
   deleteBook(data) {

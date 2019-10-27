@@ -109,16 +109,16 @@ export class BooksComponent implements OnInit {
     ConsoleService.log2('open edit', data);
     if (data == 'add') {
       this.dialog.open(EditBookComponent);
-    }
-
-    if (this.selectedBooks != null) {
-      this.dialog.open(EditBookComponent);
     } else {
-      Swal.fire({
-        title: 'Delete row',
-        text: 'Please select row to delete',
-        type: 'warning'
-      }).then(res => ConsoleService.log2(res));
+      if (this.selectedBooks != null) {
+        this.dialog.open(EditBookComponent);
+      } else {
+        Swal.fire({
+          title: 'Delete row',
+          text: 'Please select row to delete',
+          type: 'warning'
+        }).then(res => ConsoleService.log2(res));
+      }
     }
   }
 

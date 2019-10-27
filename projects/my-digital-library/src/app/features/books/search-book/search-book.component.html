@@ -1,0 +1,48 @@
+<!--<p>search-book works!</p>-->
+<div class="container-fluid">
+  <h1>Search book..</h1>
+  <mat-form-field class="example-full-width" style="width: 100%;">
+    <input (change)="searchBook()" (keyup)="searchBook()" [(ngModel)]="searchKeyword" matInput
+           placeholder="Favorite food" value="Sushi">
+  </mat-form-field>
+
+  <!--<div *ngFor="let book of resultBooks">-->
+  <!--  {{book.payload.doc.data().publisherName}}-->
+  <!--  &lt;!&ndash;  {{book.title}}&ndash;&gt;-->
+  <!--</div>-->
+
+  <div style=" overflow: auto;">
+    <mat-list *ngFor="let book of resultBooks">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <!--        <div class="example-header-image" mat-card-avatar></div>-->
+          <mat-card-title>{{book.payload.doc.data().bookName}}</mat-card-title>
+          <mat-card-subtitle>{{book.payload.doc.data().publisherName}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content style="padding: 3px;">
+          <div class="row">
+            <div class="col-auto">
+              <img alt="Photo of a Shiba Inu" height="100" mat-card-image
+                   src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                   width="100">
+            </div>
+            <div class="col">
+              <p>
+                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
+              </p>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-stroked-button>LIKE</button>
+          <button mat-stroked-button>SHARE</button>
+          <button mat-stroked-button>More Blurb</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </mat-list>
+  </div>
+</div>
