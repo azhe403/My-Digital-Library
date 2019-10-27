@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const moment = require("moment");
 const fs = require("fs");
 const path = require("path");
 const archiver = require("archiver");
@@ -41,7 +42,9 @@ const buildZip = (src, dist, zipFilename) => {
 
 const main = () => {
   const { name, version } = extractExtensionData();
-  const zipFilename = `${name}-v${version}.zip`;
+  const raw_date = new Date();
+  const date = moment(raw_date).format('YYYYMMDD-HHmm');
+  const zipFilename = `${name}-v${version}-${date}.zip`;
 
   makeDestZipDirIfNotExists();
 
