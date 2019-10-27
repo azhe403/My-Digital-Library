@@ -2,12 +2,18 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/cor
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ConsoleService } from '../../../core/console/console.service';
 import { BooksService } from '../../../shared/services/books.service';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { APP_DATE_FORMATS, AppDateAdapter } from '../../../core/datepicker/format-datepicker';
 
 @Component({
   selector: 'anms-edit-book',
   templateUrl: './edit-book.component.html',
   styleUrls: ['./edit-book.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class EditBookComponent implements OnInit {
 

@@ -150,7 +150,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AgGridModule,
     FlexLayoutModule,
     SweetAlert2Module
-  ]
+  ], providers: []
 })
 
 export class SharedModule {

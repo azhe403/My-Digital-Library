@@ -1,13 +1,12 @@
-import browser from "browser-detect";
-import { Component, OnInit } from "@angular/core";
-import { select, Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+import browser from 'browser-detect';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { environment as env } from "../../environments/environment";
+import { environment as env } from '../../environments/environment';
 
 import {
   AppState,
-  authLogin,
   authLogout,
   LocalStorageService,
   routeAnimations,
@@ -15,13 +14,14 @@ import {
   selectIsAuthenticated,
   selectSettingsLanguage,
   selectSettingsStickyHeader
-} from "../core/core.module";
+} from '../core/core.module';
 import {
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeLanguage
-} from "../core/settings/settings.actions";
-import { MatDialog } from "@angular/material/dialog";
-import { SettingsContainerComponent } from "../features/settings/settings/settings-container.component";
+} from '../core/settings/settings.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { SettingsContainerComponent } from '../features/settings/settings/settings-container.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'anms-root',
@@ -54,7 +54,8 @@ export class AppComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private storageService: LocalStorageService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   private static isIEorEdgeOrSafari() {
@@ -78,7 +79,8 @@ export class AppComponent implements OnInit {
   }
 
   onLoginClick() {
-    this.store.dispatch(authLogin());
+    // this.store.dispatch(authLogin());
+    this.router.navigate(['/login']).then(res => console.log(res));
   }
 
   onLogoutClick() {

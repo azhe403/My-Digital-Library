@@ -10,6 +10,7 @@ import { AppState } from '../../../core/core.state';
 import { selectEffectiveTheme } from '../../../core/settings/settings.selectors';
 import { BooksService } from '../../../shared/services/books.service';
 import { EditBookComponent } from '../edit-book/edit-book.component';
+import { Datetime } from '../../../core/datetime/datetime';
 
 @Component({
   selector: 'anms-books',
@@ -38,7 +39,7 @@ export class BooksComponent implements OnInit {
     { headerName: 'Number of Pages', field: 'numberOfPages', width: 135 },
     { headerName: 'Publisher Name', field: 'publisherName' },
     { headerName: 'Writer Name', field: 'writerName' },
-    { headerName: 'Publish', field: 'datePublished', valueFormatter: formatDate }
+    {headerName: 'Publish', field: 'datePublished', valueFormatter: Datetime.formatDate}
   ];
 
   // rowData = [
