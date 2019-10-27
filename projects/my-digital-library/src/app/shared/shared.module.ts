@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -27,7 +27,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  FaIconLibrary,
+  FontAwesomeModule
+} from '@fortawesome/angular-fontawesome';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
@@ -150,12 +153,38 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AgGridModule,
     FlexLayoutModule,
     SweetAlert2Module
-  ], providers: []
-})
+  ],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'fr'
+    }
 
+    // useValue {
+    //   provide: DateAdapter,
+    //   useClass: MomentDateAdapter,
+    //   deps: [MAT_DATE_LOCALE]
+    // }, {
+    //   provide: MAT_DATE_FORMATS,
+    //   useValue: MY_FORMATS
+    // }
+  ]
+})
 export class SharedModule {
   constructor(iconLibrary: FaIconLibrary) {
     iconLibrary.addIconPacks(fas);
     iconLibrary.addIconPacks(fab);
   }
 }
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY'
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MM YYYY'
+  }
+};

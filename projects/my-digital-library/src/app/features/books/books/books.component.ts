@@ -19,7 +19,6 @@ import { Datetime } from '../../../core/datetime/datetime';
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BooksComponent implements OnInit {
-
   books = [];
   bookLists;
   gridApi: GridApi;
@@ -39,7 +38,11 @@ export class BooksComponent implements OnInit {
     { headerName: 'Number of Pages', field: 'numberOfPages', width: 135 },
     { headerName: 'Publisher Name', field: 'publisherName' },
     { headerName: 'Writer Name', field: 'writerName' },
-    {headerName: 'Publish', field: 'datePublished', valueFormatter: Datetime.formatDate}
+    {
+      headerName: 'Publish',
+      field: 'datePublished',
+      valueFormatter: Datetime.formatDate
+    }
   ];
 
   // rowData = [
@@ -57,7 +60,6 @@ export class BooksComponent implements OnInit {
     private console: ConsoleService,
     private swalLoader: SweetAlert2LoaderService
   ) {
-
   }
 
   onColumnResized(data) {
@@ -69,33 +71,29 @@ export class BooksComponent implements OnInit {
     this.gridColumnApi = grid.columnApi;
   }
 
-
   ngOnInit() {
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
 
     this.console.log('theme', this.theme$);
 
-    this.bookService
-      .getBooks()
-      .subscribe(res => {
-        console.log('books', res);
+    this.bookService.getBooks().subscribe(res => {
+      console.log('books', res);
 
-        const rowData = [];
-        res.forEach(x => {
-          let row = {};
-          row = x.payload.doc.data();
-          row['id'] = x.payload.doc.id;
+      const rowData = [];
+      res.forEach(x => {
+        let row = {};
+        row = x.payload.doc.data();
+        row['id'] = x.payload.doc.id;
 
-          // this.console.log(row);
-          // this.console.log(x.payload.doc.id);
+        // this.console.log(row);
+        // this.console.log(x.payload.doc.id);
 
-          rowData.push(row);
-        });
-
-
-        this.console.log('row_data', rowData);
-        this.gridApi.setRowData(rowData);
+        rowData.push(row);
       });
+
+      this.console.log('row_data', rowData);
+      this.gridApi.setRowData(rowData);
+    });
   }
 
   onSubmit() {
@@ -141,30 +139,30 @@ export class BooksComponent implements OnInit {
     const swal = await this.swalLoader.swal;
 
     if (this.selectedBooks) {
-      await swal.fire({
-        title: 'Are you sure?',
-        text: 'Once deleted, you will not be able to recover this imaginary file!',
-        type: 'warning',
-        showConfirmButton: true,
-        showCancelButton: true
-      })
-        .then((willDelete) => {
-
+      await swal
+        .fire({
+          title: 'Are you sure?',
+          text:
+            'Once deleted, you will not be able to recover this imaginary file!',
+          type: 'warning',
+          showConfirmButton: true,
+          showCancelButton: true
+        })
+        .then(willDelete => {
           if (willDelete.value) {
             swal.fire('Success');
             this.selectedBooks.forEach(selected => {
               this.console.log('deleted', selected.id);
-              this.bookService.deleteBookById(selected.id).then(res =>
-                this.console.log('delete', res)
-              );
+              this.bookService
+                .deleteBookById(selected.id)
+                .then(res => this.console.log('delete', res));
             });
           } else {
             swal.fire({
-                title: 'Delete row',
-                text: 'Delete cancelled',
-                type: 'info'
-              }
-            );
+              title: 'Delete row',
+              text: 'Delete cancelled',
+              type: 'info'
+            });
           }
 
           console.log(willDelete);
@@ -174,21 +172,10 @@ export class BooksComponent implements OnInit {
         title: 'Delete row',
         text: 'Please select row to delete',
         type: 'warning'
-
       });
       this.console.log('nothing to delete');
     }
   }
 
   deleteBook = data => this.bookService.deleteBook(data);
-}
-
-function formatDate(param) {
-  const data = param.data;
-  const seconds = data.datePublished.seconds;
-  const date = new Date(seconds * 1000).toISOString().slice(0, 10);
-  ConsoleService.log2('format second', seconds);
-  ConsoleService.log2('format date', date);
-
-  return date;
 }
