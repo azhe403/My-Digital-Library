@@ -8,14 +8,14 @@
     <form (ngSubmit)="onLogin()" [formGroup]="form" class="example-form">
       <mat-card-content>
         <mat-form-field [ngClass]="routeAnimationsElements" class="example-full-width">
-          <input formControlName="username" matInput placeholder="Username">
+          <input formControlName="username" matInput placeholder="Username" type="text">
           <mat-error *ngIf="form.controls.username.errors">
             Please fill username
           </mat-error>
         </mat-form-field>
 
         <mat-form-field [ngClass]="routeAnimationsElements" class="example-full-width">
-          <input formControlName="password" matInput placeholder="Password">
+          <input formControlName="password" matInput placeholder="Password" type="password">
           <mat-error *ngIf="form.controls.username.errors">
             Please fill password
           </mat-error>

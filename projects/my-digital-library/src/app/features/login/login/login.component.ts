@@ -7,6 +7,8 @@ import { AuthGuardService } from '../../../core/auth/auth-guard.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../core/core.state';
 import { authLogin } from '../../../core/core.module';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'anms-login',
@@ -15,6 +17,7 @@ import { authLogin } from '../../../core/core.module';
 })
 export class LoginComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  isAuthenticated$: Observable<boolean>;
 
   form: FormGroup = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -25,12 +28,12 @@ export class LoginComponent implements OnInit {
     private console: ConsoleService,
     private authService: AuthGuardService,
     private store: Store<AppState>,
+    private router: Router
   ) {
     this.ngOnInit();
   }
 
   ngOnInit() {
-    const can = this.authService.canActivate();
   }
 
   onLogin() {

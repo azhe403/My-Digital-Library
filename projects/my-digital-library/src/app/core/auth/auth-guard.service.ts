@@ -15,8 +15,4 @@ export class AuthGuardService implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.store.pipe(select(selectIsAuthenticated));
   }
-
-  isLoggedIn() {
-
-  }
 }
