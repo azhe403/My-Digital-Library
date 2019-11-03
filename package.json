@@ -87,7 +87,7 @@
     "@angular/language-service": "~8.2.12",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "@types/jasmine": "~3.4.4",
+    "@types/jasmine": "~3.4.5",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.11.7",
     "@types/uuid": "^3.4.6",
