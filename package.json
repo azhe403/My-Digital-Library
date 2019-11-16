@@ -91,7 +91,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.12.7",
     "@types/uuid": "^3.4.6",
-    "all-contributors-cli": "^6.10.0",
+    "all-contributors-cli": "^6.11.0",
     "archiver": "^3.1.1",
     "codelyzer": "^5.2.0",
     "express": "^4.16.4",
