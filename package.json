@@ -61,7 +61,7 @@
     "@ngrx/entity": "^8.5.1",
     "@ngrx/router-store": "^8.5.1",
     "@ngrx/store": "^8.5.1",
-    "@ngrx/store-devtools": "^8.5.1",
+    "@ngrx/store-devtools": "8.5.2",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "@sweetalert2/ngx-sweetalert2": "^6.0.1",
